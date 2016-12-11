@@ -1,0 +1,32 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>historical-development-graph test</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../historical-development-graph.html">
+  </head>
+  <body>
+
+    <test-fixture id="basic">
+      <template>
+        <historical-development-graph></historical-development-graph>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('historical-development-graph', function() {
+
+        test('instantiating the element works', function() {
+          var element = fixture('basic');
+          assert.equal(element.is, 'historical-development-graph');
+        });
+
+      });
+    </script>
+  </body>
+</html>
