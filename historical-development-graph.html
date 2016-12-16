@@ -18,10 +18,6 @@
         background-color: black;
       }
 
-      .container {
-        
-      }
-
       button {
         cursor: pointer;
       }
@@ -30,14 +26,6 @@
         position: relative;
         z-index: 1;
         background-color: black;
-      }
-
-      chart-line {
-        width: 100%;
-        min-height: 10vh;
-        color: white;
-        margin-top: -24px;
-        z-index: 0;
       }
 
       #select-period {
@@ -77,14 +65,26 @@
         border: 0;
         background-color: transparent;
         color: var(--color-red);
-/*        border-bottom: 2px solid var(--color-red);
-*/      position: relative;
+        position: relative;
         outline: none;
         font-size: 18px;
         display: flex;
         justify-content: flex-start;
         align-items: center;
         padding: 0;
+      }
+
+      #select-location select {
+        position: absolute;
+        width: 25%;
+        height: 54px;
+        opacity: 0;
+        font-size: 18px;
+        top: 20px;
+      }
+      
+      #select-period button[selected] {
+        border-bottom-color: var(--color-red);
       }
 
       svg {
@@ -106,32 +106,12 @@
         fill: white;        
       }
 
-      #select-location select {
-        position: absolute;
-        width: 25%;
-        height: 54px;
-        opacity: 0;
-        font-size: 18px;
-        top: 20px;
-      }
-
-/*      #select-location::before {
-        position: absolute;
-        z-index: 2;
-        content: attr(data-value);
-        top:0;
-        left:0;
-        right: 0;
-        bottom: 0;
-        background-color: black;
-        box-sizing: border-box;
-        text-align: center;
-        font-size: 18px;
+      chart-line {
+        width: 100%;
+        min-height: 10vh;
         color: white;
-      }*/
-
-      #select-period button[selected] {
-        border-bottom-color: var(--color-red);
+        margin-top: -24px;
+        z-index: 0;
       }
 
       footer {
