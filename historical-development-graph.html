@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paranoia-watch-styles/paranoia-watch-styles.html">
 <link rel="import" href="../chart-elements/chart-line.html">
 <script src="../moment/moment.js"></script>
 
@@ -11,103 +12,40 @@
 
 <dom-module id="historical-development-graph">
   <template>
-    <style>
+    <style include="paranoia-watch-styles">
       :host {
-        display: block;
-        --color-red: rgba(255, 0, 80, 1);
         background-color: black;
+      }
+
+      .radio-group {
+        display: flex;
+        color: white;
+      }
+
+      .radio-button,
+      .select-button {
+        color: white;
+      }
+
+      .select-button {
+        background-color: black!important;
+        z-index: 1;
+        position: relative;
+      }
+
+      select {
+        z-index: 2;
       }
 
       .container {
-        flex: 1;
-      }
-
-      button {
-        cursor: pointer;
-      }
-
-      header {
-        position: relative;
-        z-index: 1;
         background-color: black;
-      }
-
-      #select-period {
-        display: flex;
-      }
-
-      #select-period button {
         flex: 1;
-        background-color: transparent;
-        outline: none;
-        border: 2px solid transparent;
-        border-bottom-color: rgba(255, 255, 255, 0.2);
-        height: 54px;
-        color: white;
-        font-size: 18px;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
       }
 
       #select-location {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
         position: relative;
-        padding: 20px 40px;
-        box-sizing: border-box;
-      }
-
-      h1 {
-        color: var(--color-red);
-        font-size: 14px;
-        font-weight: bolder;
-        margin-top: 10px;
-        text-transform: uppercase;
-      }
-
-      #selectedLocationButton {
-        flex: 1;
-        border: 0;
-        background-color: transparent;
-        color: var(--color-red);
-        position: relative;
-        outline: none;
-        font-size: 18px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 0;
-      }
-
-      #select-location select {
-        position: absolute;
-        width: 25%;
-        height: 54px;
-        opacity: 0;
-        font-size: 18px;
-        top: 20px;
-      }
-      
-      #select-period button[selected] {
-        border-bottom-color: var(--color-red);
-      }
-
-      svg {
-        width: 15px;
-        height: 12px;
-      }
-
-      #selectedLocationButton svg {
-        width: 15px;
-        height: 12px;
-        margin: 3px 0 0 5px;
-      }
-
-      svg g {
-        fill: var(--color-red);        
-      }
-
-      svg g:hover, svg g:active {
-        fill: white;        
       }
 
       chart-line {
@@ -120,14 +58,13 @@
 
       footer {
         display: flex;
+        margin: 18px 0;
       }
 
-      footer h5 {
-        flex: 2;
-        font-size: 18px;
-        color: var(--color-red);
+      footer label {
         text-align: center;
-        font-weight: 400;
+        color: var(--paranoia-color--red);
+        flex: 1;
       }
 
       footer button {
@@ -140,10 +77,14 @@
 
       footer #prevButton svg {
         transform: rotate(90deg);
+        fill: white;
+        height: 18px;
       }
 
       footer #nextButton svg {
         transform: rotate(-90deg);
+        fill: white;
+        height: 18px;
       }
     </style>
 
@@ -151,27 +92,21 @@
 
     <header>
 
-      <nav id="select-period">
-        <button value="week" on-tap="_selectPeriod" selected$="[[_selectedPeriodIsWeek]]">Week</button>
-        <button value="month" on-tap="_selectPeriod" selected$="[[_selectedPeriodIsMonth]]">Month</button>
-        <button value="year" on-tap="_selectPeriod" selected$="[[_selectedPeriodIsYear]]">Year</button>
+      <nav id="select-period" class="radio-group">
+        <button class="radio-button" value="week" on-tap="_selectPeriod" selected$="[[_selectedPeriodIsWeek]]">Week</button>
+        <button class="radio-button" value="month" on-tap="_selectPeriod" selected$="[[_selectedPeriodIsMonth]]">Month</button>
+        <button class="radio-button" value="year" on-tap="_selectPeriod" selected$="[[_selectedPeriodIsYear]]">Year</button>
       </nav>
 
       <nav id="select-location">
-        <button id="selectedLocationButton">
+        <button id="selectedLocationButton" class="select-button">
           [[selectedLocation]]
-          <svg viewBox="0 0 15 12" version="1.1" xmlns="http://www.w3.org/2000/svg">
-              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <polygon transform="translate(7.700000, 6.000000) rotate(-90.000000) translate(-7.700000, -6.000000) " points="11.4 1.4 10 -1.70530257e-13 4 6 10 12 11.4 10.6 6.8 6"></polygon>
-              </g>
-          </svg>
           </button>
         <select value="{{selectedLocation::change}}">
           <option value="Amsterdam">Amsterdam</option>
           <option value="Berlin">Berlin</option>
           <option value="Paris">Paris</option>
         </select>
-        <h1>Historical development</h1>
       </nav>
 
     </header>
@@ -181,16 +116,16 @@
     <footer>
       <button id="prevButton" on-tap="_selectPreviousPeriod">
       <svg viewBox="0 0 15 12" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g stroke="none" stroke-width="1" fill-rule="evenodd">
             <polygon transform="translate(7.700000, 6.000000) rotate(-90.000000) translate(-7.700000, -6.000000) " points="11.4 1.4 10 -1.70530257e-13 4 6 10 12 11.4 10.6 6.8 6"></polygon>
           </g>
       </svg>
       </button>
-      <h5>[[selectedPeriodLabel]]</h5>
+      <label>[[selectedPeriodLabel]]</label>
 
       <button id="nextButton" on-tap="_selectNextPeriod">
       <svg viewBox="0 0 15 12" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g stroke="none" stroke-width="1" fill-rule="evenodd">
             <polygon transform="translate(7.700000, 6.000000) rotate(-90.000000) translate(-7.700000, -6.000000) " points="11.4 1.4 10 -1.70530257e-13 4 6 10 12 11.4 10.6 6.8 6"></polygon>
           </g>
       </svg>

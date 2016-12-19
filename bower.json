@@ -2,7 +2,8 @@
   "name": "historical-development-graph",
   "main": "historical-development-graph.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0",
+    "polymer": "Polymer/polymer#^1.7.0",
+    "paranoia-watch-styles": "paranoia-watch/paranoia-watch-styles",
     "chart-elements": "robdodson/chart-elements#^3.1.3",
     "moment": "^2.17.1"
   },
