@@ -492,7 +492,7 @@
         })
 
         var locationValues = filteredValues.map(function(locationValue) {
-          return locationValue.averageWeight;
+          return locationValue.deviationPercentage;
         })
 
         var datasets = [{
@@ -500,7 +500,13 @@
           data: locationValues,
           borderWidth: 2,
           pointBorderColor: 'transparent',
-          backgroundColor: 'rgba(255, 0, 80, 1)'
+          borderColor: 'rgba(255, 0, 80, 1)'
+        },{
+          label: 'Average',
+          data: locationValues.map(function(locationValue) { return 0 }),
+          borderWidth: 1,
+          pointBorderColor: 'transparent',
+          borderColor: 'rgba(255, 255, 255, 1)'          
         }]
 
         return {
